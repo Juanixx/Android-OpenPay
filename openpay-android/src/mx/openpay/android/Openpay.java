@@ -23,6 +23,11 @@ import mx.openpay.android.services.CardService;
 import mx.openpay.android.services.ServicesFactory;
 import mx.openpay.android.services.TokenService;
 import android.os.AsyncTask;
+import android.util.Log;
+import android.webkit.ConsoleMessage;
+import android.widget.EditText;
+
+import java.io.Console;
 
 /**
  * The Class OpenPay.
@@ -33,9 +38,11 @@ public class Openpay {
 
 	private static final String URL_PRODUCTION = "https://api.openpay.mx";
 
-	public static final String OPENPAY_MERCHANT_ID = "203000";
+	public static final String OPENPAY_MERCHANT_ID = "m18f4qau8flkyrywds5a";
 
-	/** The openpay api. */
+    Token newToken;
+
+    /** The openpay api. */
 	private CardService cardService;
 	private TokenService tokenService;
 	private DeviceCollectorDefaultImpl deviceCollectorDefaultImpl;
@@ -117,8 +124,9 @@ public class Openpay {
 			protected OpenPayResult<Token> doInBackground(final Void... params) {
 				OpenPayResult<Token> openPayResult = new OpenPayResult<Token>();
 				try {
-					Token newToken = Openpay.this.tokenService.create(card);
-					openPayResult.setOperationResult(new OperationResult<Token>(newToken));
+					newToken = Openpay.this.tokenService.create(card);
+                    Log.d("Token: ", newToken.getId().toString());
+                    openPayResult.setOperationResult(new OperationResult<Token>(newToken));
 				} catch (OpenpayServiceException e) {
 					openPayResult.setOpenpayServiceException(e);
 				} catch (ServiceUnavailableException e) {
@@ -138,9 +146,12 @@ public class Openpay {
 				}
 
 			}
-
 		}.execute();
 	}
+
+    public Token GetToken(){
+        return newToken;
+    }
 
 	public DeviceCollectorDefaultImpl getDeviceCollectorDefaultImpl() {
 		return this.deviceCollectorDefaultImpl;

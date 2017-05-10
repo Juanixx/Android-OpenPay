@@ -24,7 +24,7 @@ public class OpenPayAppExample extends Application {
 	
 	public OpenPayAppExample() {
 
-		this.openpay = new Openpay("mh9ovicn5oqq2wgpyo1v", "pk_4f007c56b11e46189100740e593ee747", false);
+		this.openpay = new Openpay("m18f4qau8flkyrywds5a", "pk_92abccdf0c49471ea85ebaf33773c6fb", false);
 	}
 	
 	

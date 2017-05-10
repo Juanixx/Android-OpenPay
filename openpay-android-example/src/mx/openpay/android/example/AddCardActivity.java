@@ -15,21 +15,22 @@
  */
 package mx.openpay.android.example;
 
-import mx.openpay.android.Openpay;
-import mx.openpay.android.OperationCallBack;
-import mx.openpay.android.OperationResult;
+import mx.openpay.android.*;
 import mx.openpay.android.exceptions.OpenpayServiceException;
 import mx.openpay.android.exceptions.ServiceUnavailableException;
 import mx.openpay.android.model.Card;
+import mx.openpay.android.model.Token;
 import mx.openpay.android.validation.CardValidator;
 import android.app.DialogFragment;
 import android.app.FragmentManager;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 public class AddCardActivity extends FragmentActivity implements OperationCallBack {
 
@@ -64,6 +65,7 @@ public class AddCardActivity extends FragmentActivity implements OperationCallBa
 			this.addToken();
 		}
 	}
+
 
 	public String getDeviceId(final View view) {
 		String deviceIdString = this.deviceIdFragment.getDeviceId();
@@ -166,6 +168,7 @@ public class AddCardActivity extends FragmentActivity implements OperationCallBa
 		if (isValid) {
 			this.progressFragment.show(this.getSupportFragmentManager(), "progress");
 			openpay.createToken(card, this);
+
 		}
 
 	}
